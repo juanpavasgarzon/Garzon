@@ -1,26 +1,31 @@
+import { Loader } from '@/components/ui/loader';
 import { useAuth } from '@/hooks/use-auth';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import Login from '@/pages/auth/login';
+import { useState } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
-const AuthGuard = ({ children }: { children: React.ReactNode }) => {
-    const { isAuthenticated } = useAuth();
-    const navigate = useNavigate();
+export const AuthGuard = ({ children }: { children: React.ReactNode }) => {
+    const [requestedLocation, setRequestedLocation] = useState<string | null>(null);
 
-    useEffect(() => {
-        const initialize = async () => {
-            if (!isAuthenticated) {
-                await navigate('/login');
-            }
-        }
+    const { isAuthenticated, isInitialized } = useAuth();
+    const { pathname } = useLocation();
 
-        initialize();
-    }, [isAuthenticated, navigate]);
+    if (!isInitialized) {
+        return <Loader />;
+    }
 
     if (!isAuthenticated) {
-        return null;
+        if (pathname !== requestedLocation) {
+            setRequestedLocation(pathname);
+        }
+
+        return <Login />;
+    }
+
+    if (requestedLocation && pathname !== requestedLocation) {
+        setRequestedLocation(null);
+        return <Navigate to={requestedLocation} />;
     }
 
     return <>{children}</>;
 };
-
-export default AuthGuard;

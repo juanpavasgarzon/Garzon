@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import axios, { AxiosInstance } from 'axios';
 import { useAuth } from '@/hooks/use-auth';
-import { useLocalStorage } from './use-local-storage';
+import { useLocalStorage } from '@uidotdev/usehooks';
 
 export const useAxios = (): AxiosInstance => {
     const [token] = useLocalStorage<string | null>("token", null);
-    const { logout } = useAuth();
+    const { logout, isInitialized } = useAuth();
 
     const instance = useMemo(() => axios.create({
         baseURL: import.meta.env.VITE_BASE_API_URL,
@@ -14,10 +14,6 @@ export const useAxios = (): AxiosInstance => {
             'Accept': '*/*',
         },
     }), []);
-
-    const handleLogout = useCallback(async () => {
-        await logout();
-    }, [logout])
 
     useEffect(() => {
         const requestInterceptor = instance.interceptors.request.use(
@@ -38,7 +34,7 @@ export const useAxios = (): AxiosInstance => {
             },
             (error) => {
                 if (error.response && error.response.status === 401) {
-                    handleLogout();
+                    logout();
                 }
                 return Promise.reject(error);
             }
@@ -48,7 +44,7 @@ export const useAxios = (): AxiosInstance => {
             instance.interceptors.request.eject(requestInterceptor);
             instance.interceptors.response.eject(responseInterceptor);
         };
-    }, [instance, token, handleLogout]);
+    }, [instance, token, isInitialized, logout]);
 
     return instance;
 };

@@ -1,24 +1,68 @@
+import { Navigate, useRoutes } from "react-router-dom";
+import { lazy } from "react";
+import { GuestGuard } from "@/guards/guest-guard";
+import { AuthGuard } from "@/guards/auth-guard";
 import { AppSidebar } from "@/layouts/sidebar/app-sidebar";
-import { Login } from "@/pages/auth/login";
-import { Register } from "@/pages/auth/register";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { GuestWrap } from "@/wraps/guest-wrap";
-import { AuthWrap } from "@/wraps/auth-wrap";
-import { HomeCharts } from "@/pages/charts/home-charts";
-import { NotFound } from "@/pages/errors/404";
+import { loadable } from "@/router/loadable";
+import { PATH_AUTH, PATH_DASHBOARD, PATH_PAGE } from "@/router/app-paths";
 
 export function AppRouter() {
-    return (
-        <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<GuestWrap Component={Login} />} />
-            <Route path="/register" element={<GuestWrap Component={Register} />} />
-
-            <Route path="/dashboard" element={<AuthWrap Component={AppSidebar} />}>
-                <Route index element={<HomeCharts />} />
-            </Route>
-
-            <Route path="*" element={<NotFound />} />
-        </Routes>
-    );
+    return useRoutes([
+        {
+            path: 'auth',
+            children: [
+                { element: <Navigate to={PATH_AUTH.login} replace />, index: true },
+                {
+                    path: 'login',
+                    element: (
+                        <GuestGuard>
+                            <Login />
+                        </GuestGuard>
+                    ),
+                },
+                {
+                    path: 'register',
+                    element: (
+                        <GuestGuard>
+                            <Register />
+                        </GuestGuard>
+                    ),
+                },
+            ],
+        },
+        {
+            path: 'dashboard',
+            element: (
+                <AuthGuard>
+                    <AppSidebar />
+                </AuthGuard>
+            ),
+            children: [
+                { element: <Navigate to={PATH_DASHBOARD.general.app} replace />, index: true },
+                { path: 'app', element: <Home />, index: true },
+            ],
+        },
+        {
+            path: '/',
+            element: <Navigate to={PATH_AUTH.login} replace />,
+        },
+        {
+            path: '*',
+            children: [
+                { path: '404', element: <NotFound /> },
+                { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
+            ],
+        },
+        { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
+    ])
 }
+
+// AUTH
+const Login = loadable(lazy(() => import('@/pages/auth/login')));
+const Register = loadable(lazy(() => import('@/pages/auth/register')));
+
+// DASHBOARDS
+const Home = loadable(lazy(() => import('@/pages/dashboard/app/home-charts')));
+
+// ERRORS
+const NotFound = loadable(lazy(() => import('@/pages/errors/404')));

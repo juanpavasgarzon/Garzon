@@ -26,7 +26,7 @@
 // } satisfies ChartConfig
 
 
-export function HomeCharts() {
+export default function HomeCharts() {
   return (
     <div className="mx-2 my-5 bg-white shadow-sm">
       {/* <CardContent>

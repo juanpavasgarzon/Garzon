@@ -21,7 +21,7 @@ const formSchema = z.object({
     password: z.string().min(1, { message: "Password is required" }),
 })
 
-export function Login() {
+export default function Login() {
     const { login } = useAuth();
 
     const form = useForm<z.infer<typeof formSchema>>({

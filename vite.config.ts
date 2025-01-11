@@ -6,8 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     hmr: {
-      overlay: false,
-      protocol: 'ws',
+      overlay: false
     },
   },
   resolve: {
