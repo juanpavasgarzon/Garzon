@@ -25,7 +25,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { navConfig } from "./nav.config"
+import { navConfig } from "@/layouts/dashboard/navbar/nav.config"
 
 export function NavMain() {
     const { isMobile, state } = useSidebar()

@@ -2,7 +2,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 import { lazy } from "react";
 import { GuestGuard } from "@/guards/guest-guard";
 import { AuthGuard } from "@/guards/auth-guard";
-import { AppSidebar } from "@/layouts/sidebar/app-sidebar";
+import { AppSidebar } from "@/layouts/dashboard/sidebar/app-sidebar";
 import { loadable } from "@/router/loadable";
 import { PATH_AUTH, PATH_DASHBOARD, PATH_PAGE } from "@/router/app-paths";
 
@@ -63,8 +63,8 @@ const Login = loadable(lazy(() => import('@/pages/auth/login')));
 const Register = loadable(lazy(() => import('@/pages/auth/register')));
 
 // DASHBOARDS
-const Home = loadable(lazy(() => import('@/pages/dashboard/app/home')));
-const Analythics = loadable(lazy(() => import('@/pages/dashboard/app/analythics')));
+const Home = loadable(lazy(() => import('@/pages/dashboard/general/home')));
+const Analythics = loadable(lazy(() => import('@/pages/dashboard/general/analythics')));
 
 // ERRORS
 const NotFound = loadable(lazy(() => import('@/pages/errors/404')));

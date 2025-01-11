@@ -18,16 +18,22 @@ export const PATH_DASHBOARD = {
     general: {
         app: path(ROOTS_DASHBOARD, '/app'),
         analythics: path(ROOTS_DASHBOARD, '/analythics'),
-        tasks: path(ROOTS_DASHBOARD, '/tasks'),
     },
     inventories: {
-        app: path(ROOTS_DASHBOARD, '/app'),
-        analythics: path(ROOTS_DASHBOARD, '/analythics'),
-        tasks: path(ROOTS_DASHBOARD, '/tasks'),
+        root: path(ROOTS_DASHBOARD, '/inventories'),
+        measurement: path(ROOTS_DASHBOARD, '/inventories/measurement'),
+        products: path(ROOTS_DASHBOARD, '/inventories/products'),
+        movements: path(ROOTS_DASHBOARD, '/inventories/movements'),
     },
     relationShips: {
-        app: path(ROOTS_DASHBOARD, '/app'),
-        analythics: path(ROOTS_DASHBOARD, '/analythics'),
-        tasks: path(ROOTS_DASHBOARD, '/tasks'),
+        root: path(ROOTS_DASHBOARD, '/relation-ships'),
+        customers: path(ROOTS_DASHBOARD, '/relation-ships/customers'),
+        suppliers: path(ROOTS_DASHBOARD, '/relation-ships/suppliers'),
+    },
+    security: {
+        root: path(ROOTS_DASHBOARD, '/security'),
+        permissions: path(ROOTS_DASHBOARD, '/security/permissions'),
+        roles: path(ROOTS_DASHBOARD, '/security/roles'),
+        users: path(ROOTS_DASHBOARD, '/security/users'),
     },
 };
