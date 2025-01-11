@@ -1,4 +1,4 @@
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 import {
     Collapsible,
     CollapsibleContent,
@@ -16,21 +16,18 @@ import {
     useSidebar,
 } from "@/components/ui/sidebar"
 import { Link, useLocation } from "react-router-dom"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
+import { navConfig } from "./nav.config"
 
-export function NavMain({
-    items,
-}: {
-    items: {
-        title: string
-        url: string
-        icon?: LucideIcon
-        items?: {
-            title: string
-            url: string
-        }[]
-    }[]
-}) {
+export function NavMain() {
     const { isMobile, state } = useSidebar()
     const location = useLocation();
 
@@ -38,7 +35,7 @@ export function NavMain({
         <SidebarGroup>
             <SidebarGroupLabel>Menu de navegación</SidebarGroupLabel>
             <SidebarMenu>
-                {items.map((item) => (
+                {navConfig.map((item) => (
                     <Collapsible
                         key={item.title}
                         asChild

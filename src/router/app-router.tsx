@@ -40,6 +40,7 @@ export function AppRouter() {
             children: [
                 { element: <Navigate to={PATH_DASHBOARD.general.app} replace />, index: true },
                 { path: 'app', element: <Home />, index: true },
+                { path: 'analythics', element: <Analythics /> }
             ],
         },
         {
@@ -62,7 +63,8 @@ const Login = loadable(lazy(() => import('@/pages/auth/login')));
 const Register = loadable(lazy(() => import('@/pages/auth/register')));
 
 // DASHBOARDS
-const Home = loadable(lazy(() => import('@/pages/dashboard/app/home-charts')));
+const Home = loadable(lazy(() => import('@/pages/dashboard/app/home')));
+const Analythics = loadable(lazy(() => import('@/pages/dashboard/app/analythics')));
 
 // ERRORS
 const NotFound = loadable(lazy(() => import('@/pages/errors/404')));
