@@ -14,10 +14,11 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useAuth } from "@/hooks/use-auth"
 import { Link } from "react-router-dom"
+import { PATH_AUTH } from "@/router/app-paths"
 
 const formSchema = z.object({
-    email: z.string().min(1, { message: "Email is required" }).email({ message: "Invalid email" }),
-    password: z.string().min(1, { message: "Password is required" }),
+    email: z.string().min(1, { message: "El campo es requerido" }).email({ message: "Invalid email" }),
+    password: z.string().min(1, { message: "El campo es requerido" }),
 })
 
 export default function Login() {
@@ -26,8 +27,8 @@ export default function Login() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            email: "garzonp2001@gmail.com",
-            password: "Jf03082001",
+            email: "",
+            password: "",
         },
     })
 
@@ -76,7 +77,7 @@ export default function Login() {
                 <div className="mt-6">
                     <div className="text-sm text-center text-gray-500">
                         ¿Aún no tienes una cuenta?
-                        <Link to="/register" className="text-blue-500"> Registrarme</Link>
+                        <Link to={PATH_AUTH.register} state={{ email: form.getValues().email }} className="text-blue-500"> Registrarme</Link>
                     </div>
                 </div>
             </div>

@@ -30,6 +30,20 @@ export const PATH_DASHBOARD = {
         customers: path(ROOTS_DASHBOARD, '/relation-ships/customers'),
         suppliers: path(ROOTS_DASHBOARD, '/relation-ships/suppliers'),
     },
+    sales: {
+        root: path(ROOTS_DASHBOARD, '/sales'),
+        orders: path(ROOTS_DASHBOARD, '/sales/orders'),
+        invoices: path(ROOTS_DASHBOARD, '/sales/invoices'),
+    },
+    scm: {
+        root: path(ROOTS_DASHBOARD, '/scm'),
+        orders: path(ROOTS_DASHBOARD, '/scm/orders'),
+        purchases: path(ROOTS_DASHBOARD, '/scm/purchases'),
+    },
+    hrm: {
+        root: path(ROOTS_DASHBOARD, '/hrm'),
+        employees: path(ROOTS_DASHBOARD, '/hrm/employees'),
+    },
     security: {
         root: path(ROOTS_DASHBOARD, '/security'),
         permissions: path(ROOTS_DASHBOARD, '/security/permissions'),

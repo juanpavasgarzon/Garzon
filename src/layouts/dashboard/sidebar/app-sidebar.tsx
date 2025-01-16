@@ -15,12 +15,19 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Outlet } from "react-router-dom"
 import { Input } from "@/components/ui/input"
+import { useLocalStorage } from "@uidotdev/usehooks"
+import { SIDEBAR_STATUS_STORAGE_KEY } from "@/config"
 
 
 export function AppSidebar() {
+    const [value, setValue] = useLocalStorage(SIDEBAR_STATUS_STORAGE_KEY, true)
+
+    const handleOpenChange = (open: boolean) => {
+        setValue(open);
+    }
 
     return (
-        <SidebarProvider>
+        <SidebarProvider open={value} onOpenChange={handleOpenChange}>
             <Sidebar collapsible="icon" >
                 <SidebarHeader>
                     <NavHeader name="Pavas Garzón" logo={Snowflake} description="Empresa familiar" />

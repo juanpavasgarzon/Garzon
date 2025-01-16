@@ -15,6 +15,7 @@ import { z } from "zod"
 import { Link, useNavigate } from "react-router-dom"
 import { useAxios } from "@/hooks/use-axios"
 import useToast from "@/hooks/use-toast"
+import { PATH_AUTH } from "@/router/app-paths"
 
 const formSchema = z.object({
     email: z.string().min(1, { message: "El campo es requerido" }).email({ message: "Invalid email" }),
@@ -29,6 +30,7 @@ const formSchema = z.object({
 
 export default function Register() {
     const navigate = useNavigate();
+
     const axios = useAxios();
     const toast = useToast();
 
@@ -46,7 +48,8 @@ export default function Register() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             await axios.post("/users/register", values);
-            await navigate("/login", { replace: true });
+
+            await navigate(PATH_AUTH.login, { replace: true });
 
             toast.showToast("¡Registro exitoso!", `¡Bienvenido, ${values.firstName}! Ahora estás listo para disfrutar de todas nuestras funciones.`);
         } catch (error: unknown) {
@@ -134,7 +137,7 @@ export default function Register() {
                 <div className="mt-6">
                     <div className="text-sm text-center text-gray-500">
                         ¿Ya tienes una cuenta?
-                        <Link to="/login" className="text-blue-500"> Acceder</Link>
+                        <Link to={PATH_AUTH.login} className="text-blue-500"> Acceder</Link>
                     </div>
                 </div>
             </div>

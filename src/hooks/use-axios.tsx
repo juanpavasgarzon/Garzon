@@ -2,9 +2,10 @@ import { useEffect, useMemo } from 'react';
 import axios, { AxiosInstance } from 'axios';
 import { useAuth } from '@/hooks/use-auth';
 import { useLocalStorage } from '@uidotdev/usehooks';
+import { ACCESS_TOKEN_STORAGE_KEY } from '@/config';
 
 export const useAxios = (): AxiosInstance => {
-    const [token] = useLocalStorage<string | null>("token", null);
+    const [token] = useLocalStorage<string>(ACCESS_TOKEN_STORAGE_KEY);
     const { logout, isInitialized } = useAuth();
 
     const instance = useMemo(() => axios.create({

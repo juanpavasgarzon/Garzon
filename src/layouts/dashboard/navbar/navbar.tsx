@@ -74,7 +74,7 @@ export function NavMain() {
                                         <DropdownMenuSeparator />
                                         <DropdownMenuGroup>
                                             {item.items?.map((subItem) => (
-                                                <DropdownMenuItem key={subItem.title}>
+                                                <DropdownMenuItem asChild key={subItem.title}>
                                                     <Link to={subItem.url}>
                                                         <span>{subItem.title}</span>
                                                     </Link>

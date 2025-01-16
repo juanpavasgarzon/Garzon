@@ -3,6 +3,7 @@ import useToast from '@/hooks/use-toast';
 import { createContext, ReactNode, useCallback, useEffect, useMemo, useReducer } from 'react';
 import { useLocalStorage } from '@uidotdev/usehooks';
 import { isValidJwtToken, getJwtSub, getJwtUser } from '@/lib/utils';
+import { ACCESS_TOKEN_STORAGE_KEY } from '@/config';
 
 interface User {
     id: string;
@@ -73,7 +74,7 @@ export const AuthContext = createContext<AuthContextType>({
 
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [state, dispatch] = useReducer(authReducer, initialState);
-    const [token, setToken] = useLocalStorage<string | undefined>("token")
+    const [token, setToken] = useLocalStorage<string>(ACCESS_TOKEN_STORAGE_KEY)
 
     const axios = useAxios();
     const toast = useToast();
@@ -150,7 +151,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, [axios, toast, setToken]);
 
     const logout = useCallback(async () => {
-        window.localStorage.removeItem('token');
+        window.localStorage.removeItem(ACCESS_TOKEN_STORAGE_KEY);
 
         dispatch({
             type: "LOGOUT"

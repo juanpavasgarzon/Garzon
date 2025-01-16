@@ -35,7 +35,7 @@ export const navConfig: NavItem[] = [
         icon: Box,
         items: [
             {
-                title: "Unidades medida",
+                title: "Unidades de medida",
                 url: PATH_DASHBOARD.inventories.measurement,
             },
             {
@@ -60,6 +60,47 @@ export const navConfig: NavItem[] = [
             {
                 title: "Proveedores",
                 url: PATH_DASHBOARD.relationShips.suppliers,
+            }
+        ],
+    },
+    {
+        title: "Ventas",
+        url: PATH_DASHBOARD.sales.root,
+        icon: Contact,
+        items: [
+            {
+                title: "Pedidos",
+                url: PATH_DASHBOARD.sales.orders,
+            },
+            {
+                title: "Facturas",
+                url: PATH_DASHBOARD.sales.invoices,
+            }
+        ],
+    },
+    {
+        title: "Cadena de suministro",
+        url: PATH_DASHBOARD.scm.root,
+        icon: Contact,
+        items: [
+            {
+                title: "Ordenes de compras",
+                url: PATH_DASHBOARD.scm.orders,
+            },
+            {
+                title: "Compras",
+                url: PATH_DASHBOARD.scm.purchases,
+            }
+        ],
+    },
+    {
+        title: "Recursos humanos",
+        url: PATH_DASHBOARD.hrm.root,
+        icon: Contact,
+        items: [
+            {
+                title: "Empleados",
+                url: PATH_DASHBOARD.hrm.employees,
             }
         ],
     },
