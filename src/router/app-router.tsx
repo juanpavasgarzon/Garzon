@@ -1,10 +1,9 @@
 import { Navigate, useRoutes } from "react-router-dom";
-import { lazy } from "react";
 import { GuestGuard } from "@/guards/guest-guard";
 import { AuthGuard } from "@/guards/auth-guard";
 import { AppSidebar } from "@/layouts/dashboard/sidebar/app-sidebar";
-import { loadable } from "@/router/loadable";
 import { PATH_AUTH, PATH_DASHBOARD, PATH_PAGE } from "@/router/app-paths";
+import * as Pages from '@/router/imports';
 
 export function AppRouter() {
     return useRoutes([
@@ -16,7 +15,7 @@ export function AppRouter() {
                     path: 'login',
                     element: (
                         <GuestGuard>
-                            <Login />
+                            <Pages.Login />
                         </GuestGuard>
                     ),
                 },
@@ -24,7 +23,7 @@ export function AppRouter() {
                     path: 'register',
                     element: (
                         <GuestGuard>
-                            <Register />
+                            <Pages.Register />
                         </GuestGuard>
                     ),
                 },
@@ -39,8 +38,14 @@ export function AppRouter() {
             ),
             children: [
                 { element: <Navigate to={PATH_DASHBOARD.general.app} replace />, index: true },
-                { path: 'app', element: <Home />, index: true },
-                { path: 'analythics', element: <Analythics /> }
+                { path: 'app', element: <Pages.Home />, index: true },
+                { path: 'analythics', element: <Pages.Analythics /> },
+                {
+                    path: 'inventories',
+                    children: [
+                        { path: 'measurements', element: <Pages.MeasurementList /> }
+                    ]
+                }
             ],
         },
         {
@@ -50,7 +55,7 @@ export function AppRouter() {
         {
             path: '*',
             children: [
-                { path: '404', element: <NotFound /> },
+                { path: '404', element: <Pages.NotFound /> },
                 { path: '*', element: <Navigate to={PATH_PAGE.page404} replace /> },
             ],
         },
@@ -58,13 +63,3 @@ export function AppRouter() {
     ])
 }
 
-// AUTH
-const Login = loadable(lazy(() => import('@/pages/auth/login')));
-const Register = loadable(lazy(() => import('@/pages/auth/register')));
-
-// DASHBOARDS
-const Home = loadable(lazy(() => import('@/pages/dashboard/general/home')));
-const Analythics = loadable(lazy(() => import('@/pages/dashboard/general/analythics')));
-
-// ERRORS
-const NotFound = loadable(lazy(() => import('@/pages/errors/404')));

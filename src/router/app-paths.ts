@@ -21,7 +21,7 @@ export const PATH_DASHBOARD = {
     },
     inventories: {
         root: path(ROOTS_DASHBOARD, '/inventories'),
-        measurement: path(ROOTS_DASHBOARD, '/inventories/measurement'),
+        measurement: path(ROOTS_DASHBOARD, '/inventories/measurements'),
         products: path(ROOTS_DASHBOARD, '/inventories/products'),
         movements: path(ROOTS_DASHBOARD, '/inventories/movements'),
     },
