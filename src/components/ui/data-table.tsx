@@ -33,7 +33,15 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
-import { ArrowUpDown, EyeOff, Filter, MoreVertical, RefreshCw, Settings, Trash } from "lucide-react"
+import {
+    ArrowUpDown,
+    EyeOff,
+    Filter,
+    FilterX,
+    MoreVertical,
+    Settings,
+    Trash
+} from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 
@@ -59,46 +67,51 @@ function DataTableTools<TData>({
             <div className="mx-2 opacity-70">
                 {title}
             </div>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button size="sm">
-                        <Settings />
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={() => columns.forEach((column) => column.setFilterValue(""))}>
-                        <div className="flex items-center justify-between w-full">
-                            <span>
-                                Refrescar filtros
-                            </span>
-                            <Trash className="ml-2 h-4 w-4" />
-                        </div>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => columns.forEach((column) => column.clearSorting())}>
-                        <div className="flex items-center justify-between w-full">
-                            <span>
-                                Refrescar orden
-                            </span>
-                            <RefreshCw className="ml-2 h-4 w-4" />
-                        </div>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    {columns
-                        .filter((column) => column.getCanHide())
-                        .map((column) => {
-                            return (
-                                <DropdownMenuCheckboxItem
-                                    key={column.id}
-                                    checked={column.getIsVisible()}
-                                    onCheckedChange={(value) => column.toggleVisibility(!!value)}
-                                >
-                                    {column.columnDef.header?.toString()}
-                                </DropdownMenuCheckboxItem>
-                            )
-                        })}
-                </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center space-x-2">
+                <Button  size="sm">
+                    <Filter />
+                </Button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button size="sm">
+                            <Settings />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={() => columns.forEach((column) => column.setFilterValue(""))}>
+                            <div className="flex items-center justify-between w-full">
+                                <span>
+                                    Borrar busquedas
+                                </span>
+                                <FilterX className="ml-2 h-4 w-4" />
+                            </div>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => columns.forEach((column) => column.clearSorting())}>
+                            <div className="flex items-center justify-between w-full">
+                                <span>
+                                    Borrar ordenes
+                                </span>
+                                <ArrowUpDown className="ml-2 h-4 w-4" />
+                            </div>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        {columns
+                            .filter((column) => column.getCanHide())
+                            .map((column) => {
+                                return (
+                                    <DropdownMenuCheckboxItem
+                                        key={column.id}
+                                        checked={column.getIsVisible()}
+                                        onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                                    >
+                                        {column.columnDef.header?.toString()}
+                                    </DropdownMenuCheckboxItem>
+                                )
+                            })}
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
         </div>
     )
 }
@@ -293,7 +306,10 @@ export default function DataTable<TData>({ title, columns, data }: DataTableProp
     return (
         <div>
             <div className="rounded-md border mt-5 bg-white">
-                <DataTableTools title={title} columns={table.getAllColumns()} />
+                <DataTableTools
+                    title={title}
+                    columns={table.getAllColumns()}
+                />
                 <Separator />
                 <Table>
                     <DataTableHeader

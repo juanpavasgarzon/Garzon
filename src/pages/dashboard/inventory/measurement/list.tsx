@@ -11,7 +11,11 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react"
+import { ChevronRight, Copy, Edit, MoreHorizontal, Trash } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
+import { Link } from "react-router-dom"
+import { PATH_DASHBOARD } from "@/router/app-paths"
 
 interface Measurement {
     id: string
@@ -95,7 +99,7 @@ export default function MeasurementList() {
         },
         {
             id: "actions",
-            header: 'Actions',
+            header: 'Acciones',
             enableColumnFilter: false,
             meta: {
                 asChild: true
@@ -114,7 +118,7 @@ export default function MeasurementList() {
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id)}>
                                 <div className="w-full flex items-center justify-between">
-                                    <span>Copy ID</span>
+                                    <span>Copiar ID</span>
                                     <Copy className="ml-2 h-4 w-4" />
                                 </div>
                             </DropdownMenuItem>
@@ -138,9 +142,36 @@ export default function MeasurementList() {
         },
     ] as ColumnDef<Measurement>[], []);
 
-    return <DataTable
-        title="Unidades de medidas"
-        data={measurements}
-        columns={columns}
-    />
+    return (
+        <div>
+            <Breadcrumb className="mt-10 mb-5">
+                <BreadcrumbList className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <Link
+                                to={PATH_DASHBOARD.inventories.root}
+                                className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400"
+                            >
+                                Inventario
+                            </Link>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator>
+                        <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+                    </BreadcrumbSeparator>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                            <span className="text-gray-900 dark:text-gray-100">Unidades de medida</span>
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+            <Separator />
+            <DataTable
+                title="Unidades de medidas"
+                data={measurements}
+                columns={columns}
+            />
+        </div>)
+
 }
