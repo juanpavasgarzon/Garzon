@@ -35,7 +35,7 @@ import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { ArrowUpDown, EyeOff, Filter, MoreVertical, RefreshCw, Settings, Trash } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
-import { Badge } from "./badge"
+import { Badge } from "@/components/ui/badge"
 
 type ColumnMetaData = {
     asChild: boolean
@@ -272,7 +272,7 @@ function DataTablePagination({
 
 export default function DataTable<TData>({ title, columns, data }: DataTableProps<TData>) {
     const [sorting, setSorting] = useState<SortingState>([]);
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({ id: false });
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
     const table = useReactTable({
