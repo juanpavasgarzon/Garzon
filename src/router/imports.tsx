@@ -12,5 +12,8 @@ export const Analythics = loadable(lazy(() => import('@/pages/dashboard/general/
 // MEASUREMENTS
 export const MeasurementList = loadable(lazy(() => import("@/pages/dashboard/inventory/measurement/list")));
 
+// PRODUCTS
+export const ProductList = loadable(lazy(() => import("@/pages/dashboard/inventory/product/list")));
+
 // ERRORS
 export const NotFound = loadable(lazy(() => import('@/pages/errors/404')));

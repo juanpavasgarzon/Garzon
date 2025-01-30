@@ -1,9 +1,6 @@
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-} from "@/components/ui/breadcrumb";
+  Page,
+} from "@/components/ui/page";
 import {
   Card,
   CardContent,
@@ -14,7 +11,6 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
-import { Separator } from "@/components/ui/separator";
 
 const pendingData = [
   { id: 1, title: "Completa tu perfil" },
@@ -26,18 +22,8 @@ export default function Home() {
   const { user } = useAuth();
 
   return (
-    <div>
-      <Breadcrumb className="mt-10 mb-5">
-        <BreadcrumbList className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <span className="text-gray-900 dark:text-gray-100">General</span>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Separator />
-      <div className="grid gap-6 lg:grid-cols-2 mt-10">
+    <Page title="Inicio">
+      <div className="grid gap-6 lg:grid-cols-2">
         <Card className="border border-gray-200 dark:border-gray-700">
           <CardHeader>
             <CardTitle className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -118,6 +104,6 @@ export default function Home() {
           </Card>
         </div>
       </div>
-    </div>
+    </Page>
   );
 }

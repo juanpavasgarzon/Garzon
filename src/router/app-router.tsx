@@ -1,7 +1,7 @@
 import { Navigate, useRoutes } from "react-router-dom";
 import { GuestGuard } from "@/guards/guest-guard";
 import { AuthGuard } from "@/guards/auth-guard";
-import { AppSidebar } from "@/layouts/dashboard/sidebar/app-sidebar";
+import { AppSidebar } from "@/layouts/dashboard/app/app-sidebar";
 import { PATH_AUTH, PATH_DASHBOARD, PATH_PAGE } from "@/router/app-paths";
 import * as Pages from '@/router/imports';
 
@@ -43,7 +43,8 @@ export function AppRouter() {
                 {
                     path: 'inventories',
                     children: [
-                        { path: 'measurements', element: <Pages.MeasurementList /> }
+                        { path: 'measurements', element: <Pages.MeasurementList /> },
+                        { path: 'products', element: <Pages.ProductList /> },
                     ]
                 }
             ],

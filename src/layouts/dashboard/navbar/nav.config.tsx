@@ -3,7 +3,10 @@ import {
     Box,
     ChartPie,
     Contact,
-    Lock
+    HandCoins,
+    Lock,
+    PersonStanding,
+    ShoppingBasket
 } from "lucide-react";
 
 interface NavItem {
@@ -31,7 +34,7 @@ export const navConfig: NavItem[] = [
     },
     {
         title: "Inventario",
-        url: PATH_DASHBOARD.relationShips.root,
+        url: PATH_DASHBOARD.inventories.root,
         icon: Box,
         items: [
             {
@@ -66,7 +69,7 @@ export const navConfig: NavItem[] = [
     {
         title: "Ventas",
         url: PATH_DASHBOARD.sales.root,
-        icon: Contact,
+        icon: HandCoins,
         items: [
             {
                 title: "Pedidos",
@@ -81,7 +84,7 @@ export const navConfig: NavItem[] = [
     {
         title: "Cadena de suministro",
         url: PATH_DASHBOARD.scm.root,
-        icon: Contact,
+        icon: ShoppingBasket,
         items: [
             {
                 title: "Ordenes de compras",
@@ -96,7 +99,7 @@ export const navConfig: NavItem[] = [
     {
         title: "Recursos humanos",
         url: PATH_DASHBOARD.hrm.root,
-        icon: Contact,
+        icon: PersonStanding,
         items: [
             {
                 title: "Empleados",

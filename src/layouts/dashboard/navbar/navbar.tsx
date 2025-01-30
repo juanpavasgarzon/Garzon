@@ -39,7 +39,7 @@ export function NavMain() {
                     <Collapsible
                         key={item.title}
                         asChild
-                        defaultOpen={location.pathname.includes(item.url)}
+                        defaultOpen={item.items.some((subItem) => location.pathname.includes(subItem.url))}
                         className="group/collapsible"
                     >
                         <SidebarMenuItem>

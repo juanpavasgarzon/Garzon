@@ -1,16 +1,7 @@
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { PATH_DASHBOARD } from "@/router/app-paths";
-import { BarChart as BarChartIcon, ChevronRight, TrendingUp, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Page } from "@/components/ui/page";
+import { BarChart as BarChartIcon, TrendingUp, Users } from "lucide-react";
 import {
     Bar,
     BarChart,
@@ -79,34 +70,8 @@ const areaChartData = [
 
 export default function Analythics() {
     return (
-        <div>
-            <Breadcrumb className="mt-10 mb-5">
-                <BreadcrumbList className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
-
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <Link
-                                to={PATH_DASHBOARD.general.app}
-                                className="flex items-center gap-1 px-2 py-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 text-blue-600 dark:text-blue-400"
-                            >
-                                General
-                            </Link>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-
-                    <BreadcrumbSeparator>
-                        <ChevronRight className="h-4 w-4 text-gray-400 dark:text-gray-500" />
-                    </BreadcrumbSeparator>
-
-                    <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                            <span className="text-gray-900 dark:text-gray-100">Analíticas</span>
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
-            <Separator />
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-10">
+        <Page title="Analíticas">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 <Card className="p-6 border border-gray-200 dark:border-gray-700">
                     <div className="flex items-center justify-between">
                         <h2 className="text-sm font-medium text-gray-600 dark:text-gray-300">
@@ -278,6 +243,6 @@ export default function Analythics() {
                     </ResponsiveContainer>
                 </div>
             </div>
-        </div>
+        </Page>
     );
 }

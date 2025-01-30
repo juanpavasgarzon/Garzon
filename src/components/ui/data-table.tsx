@@ -285,7 +285,7 @@ function DataTablePagination({
 
 export default function DataTable<TData>({ title, columns, data }: DataTableProps<TData>) {
     const [sorting, setSorting] = useState<SortingState>([]);
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({ id: false });
+    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
     const table = useReactTable({
